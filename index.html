@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bujuk Jangan Ngambek</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #fdf2f8 0%, #f3e8ff 50%, #fce7f3 100%);
+      min-height: 100vh;
+    }
+    
+    @keyframes gentleFloat {
+      0%, 100% { 
+        transform: translateY(0px);
+      }
+      50% { 
+        transform: translateY(-8px);
+      }
+    }
+    
+    @keyframes subtleScale {
+      0%, 100% { 
+        transform: scale(1);
+      }
+      50% { 
+        transform: scale(1.02);
+      }
+    }
+    
+    @keyframes fadeInUp {
+      0% { 
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes softGlow {
+      0%, 100% { 
+        box-shadow: 0 8px 32px rgba(219, 39, 119, 0.1);
+      }
+      50% { 
+        box-shadow: 0 12px 40px rgba(219, 39, 119, 0.15);
+      }
+    }
+    
+    .main-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(219, 39, 119, 0.1);
+      animation: gentleFloat 6s ease-in-out infinite, softGlow 4s ease-in-out infinite;
+    }
+    
+    .btn-yes {
+      background: linear-gradient(135deg, #db2777 0%, #be185d 100%);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-yes:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(219, 39, 119, 0.3);
+      background: linear-gradient(135deg, #be185d 0%, #9d174d 100%);
+    }
+    
+    .btn-no {
+      background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-no:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(107, 114, 128, 0.3);
+      background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+    }
+    
+    .fade-in {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+    
+    .option-btn {
+      transition: all 0.3s ease;
+      background: linear-gradient(135deg, var(--start), var(--end));
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .option-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    .custom-input {
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(219, 39, 119, 0.1);
+    }
+    
+    .custom-input:focus {
+      outline: none;
+      border-color: rgba(219, 39, 119, 0.3);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 20px rgba(219, 39, 119, 0.1);
+    }
+    
+    .text-elegant {
+      color: #374151;
+      text-shadow: none;
+    }
+    
+    .text-accent {
+      color: #db2777;
+      font-weight: 600;
+    }
+    
+    .text-muted {
+      color: #6b7280;
+    }
+    
+    .card-shadow {
+      box-shadow: 0 20px 60px rgba(219, 39, 119, 0.08);
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+  <div id="main" class="main-card rounded-2xl shadow-xl p-10 text-center max-w-md mx-auto card-shadow">
+    
+    <h1 class="text-3xl font-semibold mb-6 text-elegant">
+      Hai, <span class="text-accent">Nitnutt</span>
+    </h1>
+    
+    <p class="text-lg mb-6 text-muted leading-relaxed">
+      Jangan ngambek lagi ya, aku minta maaf
+    </p>
+    
+    <p class="mb-8 text-elegant font-medium text-xl">
+      Dimaafin nggak nih?
+    </p>
+
+    <div class="flex justify-center gap-6">
+      <button id="yesBtn" class="btn-yes px-8 py-3 text-white rounded-xl font-medium shadow-lg text-base">
+        Iya
+      </button>
+      <button id="noBtn" class="btn-no px-8 py-3 text-white rounded-xl font-medium shadow-lg text-base">
+        Belum
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const main = document.getElementById("main");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+
+    // Nomor WA (ubah ke nomor asli)
+    const waNumber = "6281225513080";
+
+    function sendToWhatsApp(message) {
+      const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
+    }
+
+    yesBtn.addEventListener("click", () => {
+      main.innerHTML = `
+        <div class="fade-in">
+          <h1 class="text-4xl font-semibold text-accent mb-6">
+            Yeay! Udah Dimaafin
+          </h1>
+          <p class="text-lg text-muted leading-relaxed mb-4">
+            Makasih banyak ya udah mau maafin
+          </p>
+          <p class="text-base text-elegant">
+            Aku janji bakal lebih baik lagi
+          </p>
+        </div>
+      `;
+      sendToWhatsApp("Nitnutt sudah maafin. Alhamdulillah");
+    });
+
+    noBtn.addEventListener("click", () => {
+      main.innerHTML = `
+        <div class="fade-in">
+          <h1 class="text-3xl font-semibold text-elegant mb-6">
+            Hmm, <span class="text-accent">oke deh...</span>
+          </h1>
+          <p class="mb-6 text-muted leading-relaxed">
+            Harus ngapain biar kamu mau maafin?
+          </p>
+          <p class="mb-8 text-elegant font-medium text-lg">
+           Mau Shilin? Boost? Dimoo? Atau apa?
+          </p>
+          
+          <div class="flex flex-col gap-4">
+            <button onclick="chooseOption('Shilin')" 
+              class="option-btn px-8 py-3 text-white rounded-xl font-medium shadow-lg"
+              style="--start: #f59e0b; --end: #d97706;">
+              Shilin
+            </button>
+            <button onclick="chooseOption('Boost')" 
+              class="option-btn px-8 py-3 text-white rounded-xl font-medium shadow-lg"
+              style="--start: #8b5cf6; --end: #7c3aed;">
+              Boost
+            </button>
+            <button onclick="chooseOption('Dimoo')" 
+              class="option-btn px-8 py-3 text-white rounded-xl font-medium shadow-lg"
+              style="--start: #06b6d4; --end: #0891b2;">
+              Dimoo
+            </button>
+            <input type="text" id="customRequest" placeholder="Atau tulis permintaanmu di sini..." 
+              class="custom-input rounded-xl p-4 w-full text-elegant placeholder-gray-400 text-center mt-2">
+            <button onclick="sendCustom()" 
+              class="option-btn px-8 py-3 text-white rounded-xl font-medium shadow-lg"
+              style="--start: #374151; --end: #1f2937;">
+              Kirim Permintaan
+            </button>
+          </div>
+        </div>
+      `;
+    });
+
+    function chooseOption(choice) {
+      document.getElementById("main").innerHTML = `
+        <div class="fade-in">
+          <h1 class="text-3xl font-semibold text-accent mb-6">
+            Noted!
+          </h1>
+          <p class="text-lg text-muted leading-relaxed mb-4">
+            Baiklah, aku siap kasih <strong class="text-accent">${choice}</strong> buat kamu
+          </p>
+          <p class="text-base text-elegant">
+            Tunggu ya!
+          </p>
+        </div>
+      `;
+      sendToWhatsApp(`Nitnutt mau ${choice}`);
+    }
+
+    function sendCustom() {
+      const req = document.getElementById("customRequest").value;
+      if (req.trim() === "") {
+        const input = document.getElementById("customRequest");
+        input.style.borderColor = "#ef4444";
+        setTimeout(() => {
+          input.style.borderColor = "rgba(219, 39, 119, 0.1)";
+        }, 1000);
+        return;
+      }
+      
+      document.getElementById("main").innerHTML = `
+        <div class="fade-in">
+          <h1 class="text-3xl font-semibold text-accent mb-6">
+            Noted!
+          </h1>
+          <p class="text-lg text-muted leading-relaxed mb-4">
+            Oke, aku bakal kasih: <strong class="text-accent">"${req}"</strong>
+          </p>
+          <p class="text-base text-elegant">
+            Permintaanmu sudah aku catat dengan baik
+          </p>
+        </div>
+      `;
+      sendToWhatsApp(`Nitnutt minta: ${req}`);
+    }
+  </script>
+</body>
+</html>
